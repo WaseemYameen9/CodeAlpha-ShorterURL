@@ -4,6 +4,7 @@ const URL = require('../Model/url')
 
 async function CreateShorterUrl(req,res)
 {
+    console.log(req.body)
     const {OUrl} = req.body
     const { nanoid } = await import('nanoid');
     const SUrl = nanoid(8)
@@ -12,7 +13,7 @@ async function CreateShorterUrl(req,res)
         shorterUrl: SUrl
     })
     const message ={
-        url: "https://localhost:3000/"+SUrl
+        url: "http://localhost:5000/"+SUrl
     }
     res.status(200).send(message)
 }

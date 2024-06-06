@@ -2,10 +2,11 @@ const URL = require('../Model/url')
 //import {nanoid} from 'nanoid';
 
 
-function CreateShorterUrl(req,res)
+async function CreateShorterUrl(req,res)
 {
     const {OUrl} = req.body
-    const SUrl = "1234"
+    const { nanoid } = await import('nanoid');
+    const SUrl = nanoid(8)
     URL.create({
         originalUrl: OUrl,
         shorterUrl: SUrl
@@ -19,7 +20,6 @@ function CreateShorterUrl(req,res)
 async function ReturnOriginalUrl(req,res)
 {
     const SUrl = req.params.shorterUrl;
-    console.log(SUrl)
     const data = await URL.findOne({shorterUrl: SUrl})
     res.redirect(data.originalUrl)
 
